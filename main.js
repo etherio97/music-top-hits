@@ -64,8 +64,8 @@ async function init() {
         now.loading = true;
         this.searchAndloadAudio(now.name, now.byArtist.name)
           .then((m) => {
-            m.play();
             let el = document.querySelector(`#track-${index}`);
+            m.play();
             el && el.scrollIntoView({
               behavior: 'smooth',
             });
@@ -76,6 +76,7 @@ async function init() {
         if (artists instanceof Array) {
           q += ' - ' + artists.join(',');
         }
+        let t = document.querySelector('title');
         let s = await this.search(q);
         let m = this.audio();
         let v = await this.video(s[0].videoId);
@@ -85,6 +86,7 @@ async function init() {
             s: o.url,
             t: o.mimeType.split(';')[0],
           }));
+        if (t) t.innerHTML = q;
         m.src = r[0].s;
         m.type = r[0].t;
         return m;
