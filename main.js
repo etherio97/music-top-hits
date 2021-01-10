@@ -17,7 +17,7 @@ async function init() {
     },
     methods: {
       search(q) {
-        const requestURL = `${BASE_URL}/search?q=${q}`;
+        const requestURL = `${BASE_URL}/s?q=${encodeURI(q)}`;
         return fetch(requestURL).then(res => res.json());
       },
       video(id) {
@@ -39,6 +39,7 @@ async function init() {
         });
         player.addEventListener('canplaythrough', () => {
           prev.loading = false;
+          player.play();
         });
         player.addEventListener('pause', () => {
           prev.state = 'paused';
@@ -77,7 +78,7 @@ async function init() {
         }
         let s = await this.search(q);
         let m = this.audio();
-        let v = await this.video(s[0].id);
+        let v = await this.video(s[0].videoId);
         let r = v.filter(v => !!v.hasAudio && !v.hasVideo);
         r = r.sort((a, b) => b.bitrate - a.bitrate)
           .map(o => ({

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>TV</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap/dist/css/bootstrap.min.css" />
+  <style>
+  body {
+    background: #ddd;
+    color: #222;
+  }
+  </style>
+</head>
+
+<body class="container">
+  <div class="mt-2" id="app">
+    <div class="table-responsive">
+      <table>
+        <thead>
+          <tr>
+            <th>#</th>
+            <th><span class="sr-only">description</span></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr
+            v-for="(item, index) in items" 
+            :key="index"
+            :class="item.playing && 'font-weight-bold'"
+            :id="`track-${index}`"
+            @click="load(index)"
+          >
+            <td>{{ item.position }}</td>
+            <td class="pt-2">
+              <h5>{{ item.name }}</h5>
+              <p>
+                <span 
+                  v-for="(artist, indexA) in item.byArtist.name" 
+                  :key="indexA" 
+                  class="badge badge-secondary mx-2 my-1"
+                >{{ artist }}</span>
+              </p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <script src="main.js"></script>
+</body>
+
+</html>
