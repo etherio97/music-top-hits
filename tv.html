@@ -8,10 +8,35 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap/dist/css/bootstrap.min.css" />
   <style>
-  body {
-    background: #ddd;
-    color: #222;
-  }
+    :root {
+      --bg-0: #002f6c;
+      --bg-1: #140078;
+      --bg-2: #37006a;
+    }
+    body {
+      background: rgb(70, 0, 117);
+      background: -moz-linear-gradient(45deg, var(--bg-0) 1%, var(--bg-1) 50%, var(--bg-2) 96%);
+      background: -webkit-linear-gradient(45deg, var(--bg-0) 1%, var(--bg-1) 50%, var(--bg-2) 96%);
+      background: linear-gradient(45deg, var(--bg-0) 1%, var(--bg-1) 50%, var(--bg-2) 96%);
+      background-position: 'cover';
+      color: #afafaf;
+    }
+
+    .track {
+      color: #4cb5ab;
+    }
+
+    .track .badge {
+      opacity: .5;
+    }
+
+    .track.active {
+      color: #26c6da;
+    }
+
+    .track.active .badge {
+      opacity: 1;
+    }
   </style>
 </head>
 
@@ -26,22 +51,12 @@
           </tr>
         </thead>
         <tbody>
-          <tr
-            v-for="(item, index) in items" 
-            :key="index"
-            :class="item.playing && 'font-weight-bold'"
-            :id="`track-${index}`"
-            @click="load(index)"
-          >
+          <tr v-for="(item, index) in items" class="track" :key="index" :class="item.playing && 'font-weight-bold active'" :id="`track-${index}`" @click="load(index)">
             <td>{{ item.position }}</td>
             <td class="pt-2">
-              <h5>{{ item.name }}</h5>
+              <h5 :class="item.playing && 'font-weight-bold'">{{ item.name }}</h5>
               <p>
-                <span 
-                  v-for="(artist, indexA) in item.byArtist.name" 
-                  :key="indexA" 
-                  class="badge badge-secondary mx-2 my-1"
-                >{{ artist }}</span>
+                <span v-for="(artist, indexA) in item.byArtist.name" :key="indexA" class="badge badge-info mx-2 my-1">{{ artist }}</span>
               </p>
             </td>
           </tr>
