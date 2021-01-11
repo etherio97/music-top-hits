@@ -31,8 +31,10 @@ async function init() {
           return player;
         }
         player = document.createElement('audio');
-        player.controls = false;
+        player.controls = true;
         player.volume = 1;
+        player.autoplay = true;
+        player.muted = true;
         player.addEventListener('error', () => {
           prev.state = null;
           prev.playing = false;
@@ -71,7 +73,8 @@ async function init() {
         this.searchAndloadAudio(now.name, now.byArtist.name)
           .then((m) => {
             let el = document.querySelector(`#track-${index}`);
-            m.play();
+            m.muted = false;
+            requestAnimationFrame(() => m.play());
             el && el.scrollIntoView({
               behavior: 'smooth',
             });
@@ -95,7 +98,7 @@ async function init() {
         if (t) t.innerHTML = q;
         const p = r.filter(a => a.t.includes('mp4'));
         m.src = p.length ? p[0].s : r[0].s;
-        m.type = p.length ? p[0].t : r[0].t;
+        m.setAttribute('type', p.length ? p[0].t : r[0].t);
         return m;
       },
       play() {
