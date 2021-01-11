@@ -31,7 +31,13 @@ async function init() {
           return player;
         }
         player = document.createElement('audio');
-        player.controls = true;
+        player.controls = false;
+        player.volume = 1;
+        player.addEventListener('error', () => {
+          prev.state = null;
+          prev.playing = false;
+          this.next();
+        });
         player.addEventListener('ended', () => {
           prev.state = null;
           prev.playing = false;
@@ -87,8 +93,9 @@ async function init() {
             t: o.mimeType.split(';')[0],
           }));
         if (t) t.innerHTML = q;
-        m.src = r[0].s;
-        m.type = r[0].t;
+        const p = r.filter(a => a.t.includes('mp4'));
+        m.src = p.length ? p[0].s : r[0].s;
+        m.type = p.length ? p[0].t : r[0].t;
         return m;
       },
       play() {
