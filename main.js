@@ -13,6 +13,7 @@ async function init() {
   const vm = new Vue({
     el: '#app',
     data: {
+      update_time: null,
       items: [],
     },
     methods: {
@@ -124,16 +125,21 @@ async function init() {
       },
     }
   });
-  const url = './chart-74.json';
-  const data = await (await fetch(url)).json();
-  const track = data.track;
-  const hits = track && track.itemListElement;
-  vm.items = hits.map(hit => {
-    let item = hit.item;
-    item.position = hit.position;
-    item.playing = false;
-    item.loading = false;
-    item.state = null;
-    return item;
+  let n = 1;
+  const { tracks, update_time } = await (await fetch('./v2-74.json')).json();
+  vm.update_time = update_time;
+  vm.items = tracks.map(({ album_name, artist_list, name, genre, images, play_duration  }) => {
+    return {
+      position: n++,
+      playing: false,
+      loading: false,
+      state: null,
+      album: album_name,
+      name,
+      title: name,
+      genre,
+      images: images.map(({ url })=>url),
+      duration: play_duration
+    };
   });
 }
