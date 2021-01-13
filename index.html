@@ -18,12 +18,16 @@
     <div class="cards">
       <div v-for="(item, index) in items" :key="index" class="py-2">
         <div class="card" :id="`track-${index}`">
+          <img :src="item.images[0]" class="card-img-top" alt="image" />
           <div class="card-header font-weight-bold">
-            <span class="badge font-size-small badge-pill badge-primary">#{{ index + 1 }}</span>
+            <span class="badge font-size-small badge-pill badge-primary">#{{ position }}</span>
             {{ item.name }}
           </div>
           <div class="card-body">
-            <span class="badge badge-secondary mx-1" v-for="(artist, artistIndex) in item.byArtist.name" :key="artistIndex">
+            <span class="badge badge-primary mx-1" v-if="item.genre">
+              {{ item.genre }}
+            </span>
+            <span class="badge badge-secondary mx-1" v-for="(artist, artistIndex) in item.artists" :key="artistIndex">
               {{ artist }}
             </span>
           </div>
