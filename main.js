@@ -71,7 +71,7 @@ async function init() {
         now.state = 'search';
         now.playing = true;
         now.loading = true;
-        this.searchAndloadAudio(now.name, now.byArtist.name)
+        this.searchAndloadAudio(now.name, now.artists)
           .then((m) => {
             let el = document.querySelector(`#track-${index}`);
             m.muted = false;
