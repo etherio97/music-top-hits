@@ -136,9 +136,8 @@ async function init() {
       state: null,
       album: album_name,
       name,
-      title: name,
       genre,
-      artists: artist_list.map(({ name }) => name),
+      artists: artist_list,
       images: images.map(({ url })=>url),
       duration: play_duration
     };
