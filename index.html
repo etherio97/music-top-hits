@@ -20,7 +20,7 @@
         <div class="card" :id="`track-${index}`">
           <img :src="item.images[0]" class="card-img-top" alt="image" />
           <div class="card-header font-weight-bold">
-            <span class="badge font-size-small badge-pill badge-primary">#{{ position }}</span>
+            <span class="badge font-size-small badge-pill badge-primary">#{{ item.position }}</span>
             {{ item.name }}
           </div>
           <div class="card-body">
