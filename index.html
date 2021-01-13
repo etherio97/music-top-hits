@@ -15,8 +15,8 @@
   <div class="mt-3" id="app">
     <h4>Top 100 Lists</h4>
     <hr />
-    <div class="cards">
-      <div v-for="(item, index) in items" :key="index" class="py-2">
+    <div class="container">
+      <div class="py-2 col-4" v-for="(item, index) in items" :key="index">
         <div class="card" :id="`track-${index}`">
           <img :src="item.images[0]" class="card-img-top" alt="image" />
           <div class="card-header font-weight-bold">
