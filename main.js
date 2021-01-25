@@ -71,8 +71,7 @@ async function init() {
         now.state = 'search';
         now.playing = true;
         now.loading = true;
-        let artist_list = now.artists.map(
-          (artist) => typeof artist === 'object' ? artist.name : artist);
+        let artist_list = now.artists.map(({ name }) => name);
         this.searchAndloadAudio(now.name, artist_list)
           .then((m) => {
             let el = document.querySelector(`#track-${index}`);
