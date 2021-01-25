@@ -28,7 +28,7 @@
               {{ item.genre }}
             </span>
             <span class="badge badge-secondary mx-1" v-for="(artist, artistIndex) in item.artists" :key="artistIndex">
-              {{ artist }}
+              {{ typeof artist === 'object' ? artist.name : artist }}
             </span>
           </div>
           <div class="card-footer">
